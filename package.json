@@ -1,0 +1,29 @@
+{
+  "name": "@anchovy_studios/alkitab",
+  "version": "0.0.1",
+  "description": "Indonesian Holy Bible",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anchovy-Studios/alkitab.git"
+  },
+  "keywords": [
+    "alkitab",
+    "holy bible",
+    "bible",
+    "alkitab parser",
+    "indonesian bible"
+  ],
+  "author": "Joshua Lauwrich Nandy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Anchovy-Studios/alkitab/issues"
+  },
+  "homepage": "https://github.com/Anchovy-Studios/alkitab#readme",
+  "dependencies": {
+    "semver": "7.3.2"
+  }
+}
