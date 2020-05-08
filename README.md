@@ -1,4 +1,4 @@
-# extract-all-zip
+# alkitab
 
 ![npm](https://img.shields.io/npm/v/@anchovy_studios/alkitab) ![npm bundle size](https://img.shields.io/bundlephobia/min/@anchovy_studios/alkitab) ![GitHub issues](https://img.shields.io/github/issues/anchovy-studios/alkitab) ![NPM](https://img.shields.io/npm/l/@anchovy_studios/alkitab)
 
