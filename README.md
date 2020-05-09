@@ -32,14 +32,14 @@ Alkitab.getVersion(true)
 - [`getVersion(log)`](#getVersion)
 - [`getBookList(sorted)`](#getBookList)
 - [`getAllErrors(formatted)`](#getAllErrors)
-- [`getInstanceError()`](#getInstanceError)
+- [`clearErrors(maxTime)`](#clearErrors)
 - [`getVerse(book, chapter, verse, options)`](#getVerse)
 - [`getVerseByQuery(query, options)`](#getVerseByQuery)
 - [`getVerseByOptions(options)`](#getVerseByOptions)
 
 ### `getVersion(log)` <a id="getVersion"></a>
 Get the installed version of this library and the latest version from npm registry
-- `log` : if `true`, print and return the result to the console. if `false`, return only the result. The default value is `false`
+- `log` : if `true`, print and return the result to the console. if `false`, return only the result. The default value is `false`.
 
 ```javascript
 // print also
@@ -68,7 +68,7 @@ The latest version is 1.0.0. Consider updating your library with npm install com
 
 ### `getBookList(sorted)` <a id="getBookList"></a>
 Get the list of valid and available book that can be used in [`getVerse(book, chapter, verse, options)`](#getVerse), [`getVerseByQuery(query, options)`](#getVerseByQuery), or [`getVerseByOptions(options)`](#getVerseByOptions)
-- `sorted` : if `true`, get list in sorted order according the Bible order. `false` otherwise.
+- `sorted` : if `true`, get list in sorted order according the Bible order. `false` otherwise. The default value is false.
 
 ```javascript
 // without sorted
@@ -98,10 +98,11 @@ OUTPUT
 ]
 ```
 
-### `getAllErrors(formatted)` <a id="getAllErrors"></a>
-Get all errors that ever happen since you install this library. The actual files is `error.log` that can be found inside this library folder. The errors will be an instance of `AlkitabException` object.
+### `getAllErrors(formatted, maxTime)` <a id="getAllErrors"></a>
+Get all errors that ever happen since you install this library. The actual files can be found in `logs/`. The errors will be an instance of `AlkitabException` object. This method will delete all the log files from the beginning until the time specified in the parameter.
 
-- `formatted` : if `true` returns an array of `AlkitabException` object. if `false` returns an array of raw string error logs.
+- `formatted` : if `true` returns an array of `AlkitabException` object. if `false` returns an array of raw string error logs. The default value is false.
+- `maxTime` : the maximum time for log files to be deleted. The default value is now using the `new Date().getTime()` function. 
 
 ```javascript
 console.log(myAlkitab.getAllErrors())
@@ -135,16 +136,44 @@ OUTPUT
   },
 ```
 
-### `getInstanceError()` <a id="getInstanceError"></a>
-Get all errors produce by this instance only. Returns an array of AlkitabException object.
+### `clearErrors(maxTime)` <a id="clearErrors"></a>
+Clear all error within the `/logs` folder until the specified time.
+
+- `maxTime` : an integer value represent the millisecond time. Use the `Date.getTime()` function to get this value. The default value is now using the `new Date().getTime()` function.
 
 ```javascript
-console.log(myAlkitab.getInstanceError())
+console.log(myAlkitab.clearErrors(new Date('2020-05-01').getTime()))
 ```
 
 OUTPUT
 
 ```bash
+[
+  '1838900000000.log',
+  '1839000000000.log',
+  ...
+]
+```
+
+### `getInstanceError()` (DEPRECATED) <a id="getInstanceError"></a>
+**DEPRECATED since 0.1.0**
+
+**(Old)** Get all errors produce by this instance only. Returns an array of AlkitabException object.
+
+**(Now)** Returns an empty array
+
+```javascript
+// old
+console.log(myAlkitab.getInstanceError())
+
+//now
+console.log(myAlkitab.getInstanceError())
+```
+
+OUTPUT
+
+```
+// old
 [
   AlkitabException:
   Oopps!! Error detected!!
@@ -158,10 +187,11 @@ OUTPUT
       at Module._compile (internal/modules/cjs/loader.js:959:30)
       at Object.Module._extensions..js (internal/modules/cjs/loader.js:995:10)
       ...
-  },
+]
+
+//now
+[]
 ```
-
-
 
 ### `getVerse(book, chapter, verse, options)` <a id="getVerse"></a>
 
@@ -210,8 +240,6 @@ Time: Friday, May 08, 2020, 06:49:52 PM
     at Alkitab.getVerse (E:\alkitab\app.js:57:32)
 ...
 ```
-
-
 
 ### `getVerseByQuery(query, options)` <a id="getVerseByQuery"></a>
 
@@ -264,8 +292,6 @@ OUTPUT
 ```bash
 Mazmur Daud, ketika ia lari dari Absalom, anaknya. (3-2) Ya TUHAN, betapa banyaknya lawanku! Banyak orang yang bangkit menyerang aku;
 ```
-
-
 
 ## Change History
 [CHANGELOG](CHANGELOG)

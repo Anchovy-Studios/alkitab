@@ -1,6 +1,6 @@
 {
   "name": "@anchovy_studios/alkitab",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Indonesian Holy Bible",
   "main": "app.js",
   "scripts": {

@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.1.0]
+- Error log files will be created for each day inside /logs directory
+- Deprecated function: getInstanceError()
+- Introduce new function clearErrors()
+
 ## [0.0.2]
 - Fix README.md typo
 
