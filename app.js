@@ -204,4 +204,4 @@ class AlkitabException extends Error {
     }
 }
 
-module.exports.alkitab = Alkitab;
+module.exports.Alkitab = Alkitab;

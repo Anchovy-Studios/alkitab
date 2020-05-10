@@ -1,12 +1,12 @@
 # alkitab
 
-![npm](https://img.shields.io/npm/v/@anchovy_studios/alkitab) ![npm bundle size](https://img.shields.io/bundlephobia/min/@anchovy_studios/alkitab) ![GitHub issues](https://img.shields.io/github/issues/anchovy-studios/alkitab) ![NPM](https://img.shields.io/npm/l/@anchovy_studios/alkitab)
+![npm](https://img.shields.io/npm/v/@anchovy_studios/alkitab) ![GitHub issues](https://img.shields.io/github/issues/anchovy-studios/alkitab) ![NPM](https://img.shields.io/npm/l/@anchovy_studios/alkitab)
 
-Holy Bible in Indonesian language.
+Holy Bible in Indonesian.
 
 ## Requirement
 
-[Node.js](https://nodejs.org/en/) 8.0.0 or higher
+[Node.js](https://nodejs.org/en/) 12.0.0 or higher
 
 ## Installation
 
@@ -18,7 +18,7 @@ $ npm install @anchovy_studios/alkitab
 ## Quick Start
 
 ```javascript
-const { Alkitab } = require('alkitab')
+const { Alkitab } = require('@anchovy_studios/alkitab')
 
 // create new instance
 const myAlkitab = new Alkitab()
@@ -27,15 +27,9 @@ const myAlkitab = new Alkitab()
 Alkitab.getVersion(true)
 ```
 
-## Methods
-
+## Static Methods
 - [`getVersion(log)`](#getVersion)
 - [`getBookList(sorted)`](#getBookList)
-- [`getAllErrors(formatted)`](#getAllErrors)
-- [`clearErrors(maxTime)`](#clearErrors)
-- [`getVerse(book, chapter, verse, options)`](#getVerse)
-- [`getVerseByQuery(query, options)`](#getVerseByQuery)
-- [`getVerseByOptions(options)`](#getVerseByOptions)
 
 ### `getVersion(log)` <a id="getVersion"></a>
 Get the installed version of this library and the latest version from npm registry
@@ -46,7 +40,7 @@ Get the installed version of this library and the latest version from npm regist
 Alkitab.getVersion(true)
 
 //without print
-console.log(Alkitab.getVersion)
+console.log(Alkitab.getVersion())
 ```
 OUTPUT
 ```bash
@@ -96,6 +90,53 @@ OUTPUT
   'Hakim-hakim',  'Rut',              '1 Samuel',
   ...
 ]
+```
+
+## Methods
+
+- [`getInstanceError()`](#getInstanceError) [**DEPRECATED**]
+- [`getAllErrors(formatted)`](#getAllErrors)
+- [`clearErrors(maxTime)`](#clearErrors)
+- [`getVerse(book, chapter, verse, options)`](#getVerse)
+- [`getVerseByQuery(query, options)`](#getVerseByQuery)
+- [`getVerseByOptions(options)`](#getVerseByOptions)
+
+### `getInstanceError()` (DEPRECATED) <a id="getInstanceError"></a>
+**DEPRECATED since 0.1.0**
+
+**(Old)** Get all errors produce by this instance only. Returns an array of AlkitabException object.
+
+**(Now)** Returns an empty array
+
+```javascript
+// old
+console.log(myAlkitab.getInstanceError())
+
+//now
+console.log(myAlkitab.getInstanceError())
+```
+
+OUTPUT
+
+```
+// old
+[
+  AlkitabException:
+  Oopps!! Error detected!!
+  We're sorry we can not find the book of adf in our database. Please check again the book list on our home page or use Alkitab.getBookList() static method.
+  Cause: Book not found!
+  Native error: undefined
+  Time: Friday, May 08, 2020, 06:26:29 PM
+
+      at Alkitab.getAllErrors (E:\alkitab\app.js:90:29)
+      at Object.<anonymous> (E:\alkitab\app.js:167:15)
+      at Module._compile (internal/modules/cjs/loader.js:959:30)
+      at Object.Module._extensions..js (internal/modules/cjs/loader.js:995:10)
+      ...
+]
+
+//now
+[]
 ```
 
 ### `getAllErrors(formatted, maxTime)` <a id="getAllErrors"></a>
@@ -155,44 +196,6 @@ OUTPUT
 ]
 ```
 
-### `getInstanceError()` (DEPRECATED) <a id="getInstanceError"></a>
-**DEPRECATED since 0.1.0**
-
-**(Old)** Get all errors produce by this instance only. Returns an array of AlkitabException object.
-
-**(Now)** Returns an empty array
-
-```javascript
-// old
-console.log(myAlkitab.getInstanceError())
-
-//now
-console.log(myAlkitab.getInstanceError())
-```
-
-OUTPUT
-
-```
-// old
-[
-  AlkitabException:
-  Oopps!! Error detected!!
-  We're sorry we can not find the book of adf in our database. Please check again the book list on our home page or use Alkitab.getBookList() static method.
-  Cause: Book not found!
-  Native error: undefined
-  Time: Friday, May 08, 2020, 06:26:29 PM
-
-      at Alkitab.getAllErrors (E:\alkitab\app.js:90:29)
-      at Object.<anonymous> (E:\alkitab\app.js:167:15)
-      at Module._compile (internal/modules/cjs/loader.js:959:30)
-      at Object.Module._extensions..js (internal/modules/cjs/loader.js:995:10)
-      ...
-]
-
-//now
-[]
-```
-
 ### `getVerse(book, chapter, verse, options)` <a id="getVerse"></a>
 
 Get one verse (as a string) or all verses within a chapter (as an array of stirng) with the specified parameters.
@@ -201,15 +204,15 @@ Get one verse (as a string) or all verses within a chapter (as an array of stirn
 - `chapter` : a number (or a string but can be converted to number) for the chapter of the book
 - `verse` : a number (or a string but can be converted to number) and can be filled with `false` or `undefined` to get all the verses in the chapter.
 - `options` : an object for extra option that contains any of these attribute
-  - `fromEn` : Set this to `true` if the book string is in English language so the method will converted it to the appropriate Indonesian language.
+  - `fromEn` : Set this to true to receive the verse in Indonesian if the book is in English.
 
 Throw `AlkitabException` for every invalid parameters.
 
 ```javascript
-console.log(getVerse('Matius', '1', '1'))
-console.log(getVerse('Matius', '1'))
+console.log(myAlkitab.getVerse('Matius', '1', '1'))
+console.log(myAlkitab.getVerse('Matius', '1'))
 // will throw an error
-console.log(getVerse('matius', '1'))
+console.log(myAlkitab.getVerse('matius', '1'))
 ```
 
 OUTPUT
@@ -247,7 +250,7 @@ Get one verse (as a string) or all verses within a chapter (as an array of stirn
 
 - `query` : a query string that match the above format.
 - `options` : an object for extra option that contains any of these attribute
-  - `fromEn` : Set this to `true` if the book string is in English language so the method will converted it to the appropriate Indonesian language.
+  - `fromEn` : Set this to true to receive the verse in Indonesian if the book is in English.
 
 Throw `AlkitabException` for every invalid parameters.
 
@@ -278,7 +281,7 @@ Time: Friday, May 08, 2020, 06:58:05 PM
 Get one verse (as a string) or all verses within a chapter (as an array of stirng) with the specified parameters as options. 
 
 - `options` : an object for extra option that contains any of these attribute
-  - `fromEn` : Set this to `true` if the book string is in English language so the method will converted it to the appropriate Indonesian language.
+  - `fromEn` : Set this to true to receive the verse in Indonesian if the book is in English.
   - `book` : a string for the Book. Use `getListBook()` to see all Book option. Make sure the string match exactly with the string from `getListBook()`.
   - `chapter` : a number (or a string but can be converted to number) for the chapter of the book
   - `verse` : a number (or a string but can be converted to number) and can be filled with `false` or `undefined` to get all the verses in the chapter.

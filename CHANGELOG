@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.1.1]
+- Fix some grammar in README.md
+- Update quick start instruction in README.md 
+
 ## [0.1.0]
 - Error log files will be created for each day inside /logs directory
 - Deprecated function: getInstanceError()
